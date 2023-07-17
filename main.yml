@@ -1,0 +1,7 @@
+---
+- name: "Customizing Ubuntu"
+  hosts: ubuntu
+  remote_user: root
+
+  roles:
+    - role: "roles/tools-install"

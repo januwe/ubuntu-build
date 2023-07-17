@@ -1,0 +1,21 @@
+---
+- name: "Install zsh"
+  package:
+    name:
+      - zsh
+    state: latest
+  become: true
+  become_method: sudo
+
+- name: "Install oh-my-zsh"
+  include_role:
+    name: "gantsign.oh-my-zsh"
+    tasks_from: "/home/{{ ansible_user_id }}/.ansible/roles/gantsign.oh-my-zsh"
+    apply:  
+      tags:
+        username: "{{ ansible_user_id }}"
+
+- name: "Copy oh-my-zsh theme"
+  copy:
+    src: "{{ role_path }}/files/uwe.zsh-theme"
+    dst: "{{ ansible_env.HOME }}/.oh-my-zsh/themes/"
