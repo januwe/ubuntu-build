@@ -9,13 +9,22 @@
 
 - name: "Install oh-my-zsh"
   include_role:
-    name: "gantsign.oh-my-zsh"
-    tasks_from: "/home/{{ ansible_user_id }}/.ansible/roles/gantsign.oh-my-zsh"
-    apply:  
-      tags:
-        username: "{{ ansible_user_id }}"
+    name: gantsign.oh-my-zsh
+  vars:
+    users:
+      - username: "{{ ansible_user_id }}"
+        oh-my-zsh:
+          plugins:
+            - git
+            - zsh-autosuggestions
+            - zsh-syntax-highlighting
+            - zsh-history-substring-search
 
 - name: "Copy oh-my-zsh theme"
   copy:
     src: "{{ role_path }}/files/uwe.zsh-theme"
-    dst: "{{ ansible_env.HOME }}/.oh-my-zsh/themes/"
+    dst: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/themes/"
+
+- name: "Change default theme"
+  command:
+    cmd: /usr/bin/sed -i ~/.zshrc -e 's/ZSH_THEME="robbyrussell"/ZSH_THEME="uwe"/g'
