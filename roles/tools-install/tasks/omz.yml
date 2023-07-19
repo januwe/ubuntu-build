@@ -23,7 +23,7 @@
 - name: "Copy oh-my-zsh theme"
   copy:
     src: "{{ role_path }}/files/uwe.zsh-theme"
-    dst: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/themes/"
+    dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/themes/"
 
 - name: "Change default theme"
   command:
