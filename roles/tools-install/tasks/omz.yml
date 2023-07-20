@@ -7,13 +7,16 @@
       - username: "{{ ansible_user_id }}"
         oh-my-zsh:
           plugins:
-            - "{{ omz_plugins  }}"
+            - "{{ omz_plugins }}"
 
 - name: "Copy oh-my-zsh theme"
   copy:
     src: "{{ role_path }}/files/uwe.zsh-theme"
-    dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/themes/"
+    dest: "{{ ansible_env.HOME }}/.oh-my-zsh/themes/"
 
 - name: "Change default theme"
   command:
     cmd: /usr/bin/sed -i ~/.zshrc -e 's/ZSH_THEME="robbyrussell"/ZSH_THEME="uwe"/g'
+
+- include_tasks: pip.yml
+- include_tasks: gitrepos.yml

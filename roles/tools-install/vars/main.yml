@@ -4,3 +4,5 @@ omz_plugins:
   - zsh-autosuggestions
   - zsh-syntax-highlighting
   - zsh-history-substring-search
+  - thefuck
+  - k
