@@ -4,3 +4,4 @@
 
   roles:
     - role: "roles/tools-install"
+    - role: "roles/configure-terminal"

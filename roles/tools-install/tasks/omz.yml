@@ -1,12 +1,4 @@
 ---
-- name: "Install zsh"
-  package:
-    name:
-      - zsh
-    state: latest
-  become: true
-  become_method: sudo
-
 - name: "Install oh-my-zsh"
   include_role:
     name: gantsign.oh-my-zsh
@@ -15,10 +7,7 @@
       - username: "{{ ansible_user_id }}"
         oh-my-zsh:
           plugins:
-            - git
-            - zsh-autosuggestions
-            - zsh-syntax-highlighting
-            - zsh-history-substring-search
+            - "{{ omz_plugins  }}"
 
 - name: "Copy oh-my-zsh theme"
   copy:

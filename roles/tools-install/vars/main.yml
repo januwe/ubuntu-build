@@ -1,2 +1,6 @@
 ---
-# vars file for tools-install
+omz_plugins:
+  - git
+  - zsh-autosuggestions
+  - zsh-syntax-highlighting
+  - zsh-history-substring-search

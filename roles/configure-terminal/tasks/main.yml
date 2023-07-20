@@ -1,3 +1,19 @@
 ---
-- name: "Set terminator to default"
-  shell: echo -n '' | update-alternatives --config x-terminal-emulator
+- name: "Create ~/.config/terminator"
+  file:
+    path: "{{ ansible_env.HOME }}/.config/terminator"
+    state: directory
+    mode: 0775
+
+- name: "Copy terminator config"
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: 0664
+  loop:
+    - { "src": "files/terminator.config", "dest": "{{ ansible_env.HOME }}/.config/terminator/config" }
+    - { "src": "files/custom-shortcuts.ini", "dest": "/tmp/custom-shortcuts.ini" }
+
+- name: "Change open terminal shortcut"
+  shell: 
+    cmd: dconf load / < /tmp/custom-shortcuts.ini

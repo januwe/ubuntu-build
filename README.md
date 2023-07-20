@@ -3,20 +3,22 @@ Ansible playbook to build my ubuntu
 
 ## ToDo
 ----
-- [ ] oh-my-zsh + theme
-- [ ] default terminal
+- [x] oh-my-zsh + theme
+- [x] default terminal
+- [ ] SpaceVim
+- [ ] auditd + laurel / ufw
 - [ ] firefox extensions
 
 ## Steps on fresh install
 ----
 1. Update and install ansible
 ```sh
-apt update && apt install ansible -y
+sudo apt update && sudo apt install ansible -y
 ```
 
 2. Install ansible-galaxy requirements
 ```sh
-ansible-galaxy install -r requirements.yml
+cd ubuntu-build/ && ansible-galaxy install -r requirements.yml
 ```
 
 3. Run ansible-playbook
