@@ -6,8 +6,14 @@ Ansible playbook to build my ubuntu
 - [x] oh-my-zsh + theme
 - [x] default terminal
 - [ ] SpaceVim
+- [ ] Obsidian
 - [ ] auditd + laurel / ufw
 - [ ] firefox extensions
+
+optional:
+
+- [ ] PrusaSlicer
+- [ ] Minecraft
 
 ## Steps on fresh install
 ----
