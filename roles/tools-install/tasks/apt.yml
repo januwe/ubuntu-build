@@ -13,6 +13,7 @@
       - jq
       - vim
       - zsh
+      - python3-pip
       - locate
       - flameshot
       - exiftool
