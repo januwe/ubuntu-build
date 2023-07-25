@@ -1,0 +1,3 @@
+---
+- name: "Download + install gobuster"
+  command: go install github.com/OJ/gobuster/v3@latest
