@@ -17,6 +17,8 @@
       - locate
       - flameshot
       - exiftool
+      - nmap
+      - golang-go
       - terminator
     state: latest
   become: true
