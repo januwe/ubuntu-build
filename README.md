@@ -5,8 +5,8 @@ Ansible playbook to build my ubuntu
 ----
 - [x] oh-my-zsh + theme
 - [x] default terminal
-- [ ] SpaceVim
-- [ ] Obsidian
+- [x] SpaceVim
+- [x] Obsidian
 - [ ] auditd + laurel / ufw
 - [ ] firefox extensions
 
