@@ -2,3 +2,4 @@
 - name: "Install Obsidian deb"
   apt:
     deb: "https://github.com/obsidianmd/obsidian-releases/releases/download/v1.3.5/obsidian_1.3.5_amd64.deb"
+  become: true

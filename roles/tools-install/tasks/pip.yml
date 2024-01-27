@@ -3,4 +3,3 @@
   pip:
     name:
       - thefuck
-    virtualenv: /venvs/work 
