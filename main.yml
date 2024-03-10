@@ -1,7 +1,19 @@
 ---
 - name: "Customizing Ubuntu"
-  hosts: localhost
+  hosts: all
 
   roles:
-    - role: "roles/tools-install"
-    - role: "roles/configure-terminal"
+    - role: "roles/apt"
+      tags: apt
+
+    - role: "roles/common"
+      tags: common
+
+    - role: "roles/vim"
+      tags: vim
+
+    - role: "roles/omz"
+      tags: omz
+
+    - role: "roles/terminal"
+      tags: terminal

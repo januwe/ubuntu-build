@@ -1,0 +1,29 @@
+---
+- name: "Create ~/.config/terminator"
+  ansible.builtin.file:
+    path: "{{ terminator_path }}"
+    state: directory
+    owner: "{{ local_user }}"
+    group: "{{ local_user }}"
+    mode: 0775
+
+- name: "Copy terminator config"
+  ansible.builtin.copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ local_user }}"
+    group: "{{ local_user }}"
+    mode: 0664
+  loop:
+    - { "src": "files/terminator.config", "dest": "{{ terminator_path }}/config" }
+    - { "src": "files/custom-shortcuts.ini", "dest": "/tmp/custom-shortcuts.ini" }
+
+- name: "Change open terminal shortcut"
+  ansible.builtin.shell: 
+    cmd: "dconf load / < /tmp/custom-shortcuts.ini"
+  become_user: "{{ local_user }}"
+
+- name: "Remove custom shortcuts file"
+  ansible.builtin.file:
+    path: /tmp/custom-shortcuts.ini
+    state: absent

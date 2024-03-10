@@ -1,0 +1,23 @@
+---
+
+- block:
+  - name: "Update apt cache"
+    ansible.builtin.apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+
+  - name: "Remove unwanted packages"
+    ansible.builtin.apt:
+      name: "{{ item }}"
+      state: absent
+    with_items: "{{ packages_absent }}"
+    when: packages_absent is defined
+
+  - name: "Installing packages"
+    ansible.builtin.apt:
+      name: "{{ item }}"
+      state: latest
+    with_items: "{{ packages_present }}"
+
+  - name: "Upgrade all packages"
+    ansible.builtin.apt: upgrade=yes force_apt_get=yes
+
+  become: true

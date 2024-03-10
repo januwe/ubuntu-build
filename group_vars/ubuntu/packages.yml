@@ -1,0 +1,14 @@
+---
+
+packages_absent:
+packages_present:
+  - jq
+  - gcc
+  - python3-pip
+  - locate
+  - flameshot
+  - exiftool
+  - nmap
+  - golang-go
+  - terminator
+

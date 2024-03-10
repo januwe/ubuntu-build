@@ -1,5 +1,0 @@
----
-- name: "Install SpaceVim"
-  script: files/install-spacevim.sh
-  become: false
-

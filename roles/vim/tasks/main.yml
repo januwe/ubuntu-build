@@ -1,0 +1,36 @@
+---
+
+- name: "Install dependencies"
+  ansible.builtin.apt:
+    name: "{{ item }}" 
+    state: latest
+  become: True
+  with_items: "{{ vim_dependencies }}"
+
+- name: "Create .SpaceVim.d dir"
+  ansible.builtin.file:
+    path: "/home/{{ local_user }}/.SpaceVim.d"
+    state: directory
+    owner: "{{ local_user }}"
+    group: "{{ local_user }}"
+    mode: 0755
+
+- name: "Download SpaceVim installer script"
+  ansible.builtin.get_url:
+    url: https://spacevim.org/install.sh
+    dest: "{{ spacevim_install_path }}"
+
+- name: "Install SpaceVim"
+  ansible.builtin.command:
+    cmd: "bash {{ spacevim_install_path }}"
+  become_user: "{{ local_user }}"
+
+- name: "Delete installer script"
+  ansible.builtin.file:
+    path: "{{ spacevim_install_path }}"
+    state: absent
+
+- name: "Set default editor to vim"
+  community.general.alternatives:
+    name: editor
+    path: /usr/bin/vim.basic

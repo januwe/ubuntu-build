@@ -1,0 +1,56 @@
+---
+
+- name: "Install dependencies"
+  ansible.builtin.package:
+    name: "{{ omz_dependencies }}"
+    state: latest
+  become: True
+
+- name: "Clone Oh-my-Zsh repo to user's home folder"
+  ansible.builtin.git:
+    repo: https://github.com/ohmyzsh/ohmyzsh.git
+    dest: "{{ omz_path }}"
+
+- name: "Clone OmZ plugins"
+  ansible.builtin.git:
+    repo: "{{ item.url }}"
+    dest: "{{ item.dest }}"
+  loop:
+    - {"url": "https://github.com/supercrabtree/k.git", "dest": "{{ omz_plugin_path }}/k"}
+    - {"url": "https://github.com/zsh-users/zsh-syntax-highlighting.git", "dest": "{{ omz_plugin_path }}/zsh-syntax-highlighting"}
+    - {"url": "https://github.com/zsh-users/zsh-autosuggestions.git", "dest": "{{ omz_plugin_path }}/zsh-autosuggestions"}
+
+- name: "Copy theme to .oh-my-zsh dir"
+  ansible.builtin.copy:
+    src: uwe.zsh-theme
+    dest: "{{ omz_theme_path}}/uwe.zsh-theme"
+    owner: "{{ local_user }}"
+    group: "{{ local_user }}"
+    mode: 0644
+
+- name: "Copy .zshrc template to user's home"
+  ansible.builtin.template:
+    src: zshrc.j2
+    dest: "{{ zshrc_path }}"
+    backup: yes
+
+- name: "Set user permissions for .oh-my-zsh dir"
+  ansible.builtin.file:
+    path: "{{ omz_path }}"
+    owner: "{{ local_user }}"
+    group: "{{ local_user }}"
+    mode: 0755
+    recurse: yes
+
+- name: "Set user permissions for .zshrc file"
+  ansible.builtin.file:
+    path: "{{ zshrc_path }}"
+    owner: "{{ local_user }}"
+    group: "{{ local_user }}"
+    mode: 0640
+
+- name: "Change default shell for user"
+  ansible.builtin.user:
+    name: "{{ local_user }}"
+    shell: /bin/zsh
+  become: True

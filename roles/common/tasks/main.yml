@@ -1,0 +1,82 @@
+---
+
+# Mount /tmp on tmpfs
+- block:
+  - name: "Deleting existing files in /tmp dir (1 / 5)"
+    ansible.builtin.shell: "/bin/rm -rf *"
+    args:
+      chdir: /tmp
+      warn: no
+
+  - name: "Copy systemd file (2 / 5)"
+    ansible.builtin.copy:
+      src: /usr/share/systemd/tmp.mount
+      dest: /lib/systemd/system/tmp.mount
+      remote_src: True
+
+  - name: "Create dir /etc/systemd/system/tmp.mount.d (3 / 5)"
+    ansible.builtin.file:
+      path: /etc/systemd/system/tmp.mount.d
+      state: directory
+      owner: root
+      group: root
+      mode: 0755
+
+  - name: "Create custom options file for tmp.mount (4 / 5)"
+    ansible.builtin.copy:
+      dest: /etc/systemd/system/tmp.mount.d/options.conf
+      content: |
+        [Mount]
+        Options=mode=1777,strictatime,nosuid,nodev,size=512M
+      owner: root
+      group: root
+      mode: 0644
+
+  - name: "Start and enable tmp.mount service (5 / 5)"
+    ansible.builtin.systemd:
+      name: tmp.mount
+      enabled: yes
+      state: started
+
+- name: "Disable sending system crash reports"
+  ansible.builtin.lineinfile:
+    dest: /etc/default/apport
+    regexp: "^enabled=(0|1)"
+    line: enabled=0
+    state: present
+
+- name: "Reducing space used by journald"
+  ansible.builtin.lineinfile:
+    dest: /etc/systemd/journald.conf
+    regexp: "^#SystemMaxUse=$"
+    line: SystemMaxUse=256M
+
+# Make fstrim run daily instead of monthly for SSD longevity
+- block:
+  - name: "Enable fstrim.timer (1 / 3)"
+    ansible.builtin.systemd:
+      name: fstrim.timer
+      enabled: yes
+      state: started
+
+  - name: "Create dir /etc/systemd/system/fstrim.timer.d (2 / 3)"
+    ansible.builtin.file:
+      path: /etc/systemd/system/fstrim.timer.d
+      state: directory
+      owner: root
+      group: root
+      mode: 0755
+
+  - name: "Create custom override file for fstrim.timer (3 / 3)"
+    ansible.builtin.copy:
+      dest: /etc/systemd/system/fstrim.timer.d/override.conf
+      content: |
+        [Timer]
+        OnCalendar=daily
+      owner: root
+      group: root
+      mode: 0644
+
+- name: "Force systemd to reload configs"
+  ansible.builtin.systemd:
+    daemon_reload: True

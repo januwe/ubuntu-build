@@ -1,0 +1,27 @@
+---
+
+vim_dependencies:
+  - vim
+  - curl
+
+omz_dependencies:
+  - zsh
+  - curl
+  - git
+
+omz_theme: uwe
+omz_path: "/home/{{ local_user }}/.oh-my-zsh"
+omz_custom_path: "{{ omz_path }}/custom"
+omz_theme_path: "{{ omz_custom_path }}/themes"
+omz_plugin_path: "{{ omz_custom_path }}/plugins"
+omz_plugins: 
+  - git
+  - k
+    #- thefuck
+  - zsh-autosuggestions
+  - zsh-syntax-highlighting
+  - history-substring-search
+
+spacevim_install_path: /tmp/install.sh
+terminator_path: "/home/{{ local_user}}/.config/terminator"
+zshrc_path: "/home/{{ local_user }}/.zshrc"

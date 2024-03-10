@@ -1,0 +1,13 @@
+What to add ?
+
+- [X] mount `/tmp` on tmpfs
+- [X] disable system crash reports
+- [X] install oh my zsh
+- [X] set default editor to vim instead of nano 
+- [ ] setup venv for python
+- [ ] install vscode
+- [ ] install docker
+- [ ] install virtualbox
+- [ ] maybe libvirt qemu setup ? 
+- [ ] add user to docker and vboxusers group
+- [X] enable fstrim for better ssd lifetime 
