@@ -1,0 +1,35 @@
+---
+
+- name: Download latest GitHub release from url
+  hosts: localhost
+  
+  tasks:
+    - name: Determine latest GitHub release
+      block:
+        - name: Get latest release info using GitHub API
+          delegate_to: localhost
+          ansible.builtin.uri:
+            url: "{{ github_url }}"
+            body_format: json
+          register: github_release
+
+        - name: Set asset urls
+          ansible.builtin.set_fact:
+            asset_urls: "{{ asset_urls|default([]) + [item] }}"
+          loop: "{{ github_release.json | json_query('assets[*].browser_download_url') }}"
+          ignore_errors: true
+      
+        - name: set fact
+          set_fact:
+            github_download: "{{ asset_urls | select('search', 'https.*linux-musl.*gz') }}"
+
+      when: github_url is defined
+      run_once: true
+
+
+    - name: Download latest GitHub release
+      ansible.builtin.get_url:
+        url: "{{ github_download }}"
+        dest: "{{ github_dest|default('/tmp/') }}"
+      when: github_download is defined
+      become: false

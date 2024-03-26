@@ -1,0 +1,7 @@
+---
+
+vbox_packages:
+  - virtualbox
+  - virtualbox-guest-additions-iso
+
+vbox_iso_path: "/media/{{ local_user }}/Share/ISOs"

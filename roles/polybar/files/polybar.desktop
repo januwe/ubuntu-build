@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=polybar
+Exec=/usr/bin/sh -c '/usr/bin/killall /usr/bin/polybar && /usr/bin/polybar --config=$HOME/.config/polybar/config.ini mybar 2>&1 | /usr/bin/tee -a /tmp/polybar.log'
+Icon=taskbar  # put an icon name here
+StartupNotify=false
+Terminal=false
+NoDisplay=false

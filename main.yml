@@ -3,17 +3,26 @@
   hosts: all
 
   roles:
-    - role: "roles/apt"
+    - role: "apt"
       tags: apt
 
-    - role: "roles/common"
+    - role: "gitui"
+      tags: gitui
+
+    - role: "polybar"
+      tags: polybar
+
+    - role: "common"
       tags: common
 
-    - role: "roles/vim"
+    - role: "vim"
       tags: vim
 
-    - role: "roles/omz"
+    - role: "omz"
       tags: omz
 
-    - role: "roles/terminal"
+    - role: "terminal"
       tags: terminal
+
+    - role: "virtualization"
+      tags: vm

@@ -80,6 +80,7 @@ bindkey '^[[1;2A' history-substring-search-up #
 bindkey '^[[1;2B' history-substring-search-down #
 
 # export MANPATH="/usr/local/man:$MANPATH"
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8

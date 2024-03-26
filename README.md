@@ -32,6 +32,7 @@ sudo apt update && sudo apt install ansible git -y
 ```sh
 git clone git@github.com:januwe/ubuntu-build.git
 cd ubuntu-build/
+ansible-galaxy collection install community.general
 ```
 
 3. Run ansible-playbook

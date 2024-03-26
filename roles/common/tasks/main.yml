@@ -80,3 +80,12 @@
 - name: "Force systemd to reload configs"
   ansible.builtin.systemd:
     daemon_reload: True
+
+- name: "Copy firefox rules for browser anonymization"
+  ansible.builtin.copy:
+    src: anonymous.js
+    dest: /etc/firefox/pref/anonymous.js
+    owner: root
+    group: root
+    mode: 0644
+

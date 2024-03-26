@@ -2,6 +2,7 @@
 
 packages_absent:
 packages_present:
+  - bat
   - jq
   - gcc
   - python3-pip
@@ -11,4 +12,5 @@ packages_present:
   - nmap
   - golang-go
   - terminator
+  - silversearcher-ag
 

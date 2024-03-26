@@ -11,14 +11,14 @@
     repo: https://github.com/ohmyzsh/ohmyzsh.git
     dest: "{{ omz_path }}"
 
-- name: "Clone OmZ plugins"
-  ansible.builtin.git:
-    repo: "{{ item.url }}"
-    dest: "{{ item.dest }}"
-  loop:
-    - {"url": "https://github.com/supercrabtree/k.git", "dest": "{{ omz_plugin_path }}/k"}
-    - {"url": "https://github.com/zsh-users/zsh-syntax-highlighting.git", "dest": "{{ omz_plugin_path }}/zsh-syntax-highlighting"}
-    - {"url": "https://github.com/zsh-users/zsh-autosuggestions.git", "dest": "{{ omz_plugin_path }}/zsh-autosuggestions"}
+# - name: "Clone OmZ plugins"
+  # ansible.builtin.git:
+    # repo: "{{ item.url }}"
+    # dest: "{{ item.dest }}"
+  # loop:
+    # - {"url": "https://github.com/supercrabtree/k.git", "dest": "{{ omz_plugin_path }}/k"}
+    # - {"url": "https://github.com/zsh-users/zsh-syntax-highlighting.git", "dest": "{{ omz_plugin_path }}/zsh-syntax-highlighting"}
+    # - {"url": "https://github.com/zsh-users/zsh-autosuggestions.git", "dest": "{{ omz_plugin_path }}/zsh-autosuggestions"}
 
 - name: "Copy theme to .oh-my-zsh dir"
   ansible.builtin.copy:

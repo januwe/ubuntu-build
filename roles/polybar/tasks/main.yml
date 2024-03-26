@@ -1,0 +1,27 @@
+---
+
+- name: Install polybar using apt
+  ansible.builtin.apt:
+    name: polybar
+    state: latest
+  become: true
+
+- name: Make config dir for polybar
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ local_user }}"
+    group: "{{ local_user }}"
+    mode: 0755
+  with_items:
+    - "{{ polybar_config }}"
+    - "{{ autostart_path }}"
+
+- name: Copy config.ini to polybar config path
+  ansible.builtin.copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items:
+    - {"src": "files/config.ini", "dest": "{{ polybar_config }}/config.ini"}
+    - {"src": "files/polybar.desktop", "dest": "{{ autostart_path }}/polybar.desktop"}
+    - {"src": "files/polybar.desktop", "dest": "{{ user_home }}/.local/share/applications/polybar.desktop"}

@@ -1,0 +1,45 @@
+---
+
+- name: Determine latest Gitui release
+  block:
+    - name: Get latest release info using GitHub API
+      delegate_to: localhost
+      ansible.builtin.uri:
+        url: "{{ gitui_url}}"
+        body_format: json
+      register: github_release
+
+    - name: Set asset urls
+      ansible.builtin.set_fact:
+        asset_urls: "{{ asset_urls|default([]) + [item] }}"
+      loop: "{{ github_release.json | json_query('assets[*].browser_download_url') }}"
+      ignore_errors: true
+
+    - name: set fact
+      set_fact:
+        github_download: "{{ asset_urls | select('search', 'https.*linux-musl.*gz') }}"
+
+  run_once: true
+  become: false
+
+
+- name: Download latest GitHub release
+  ansible.builtin.get_url:
+    url: "{{ github_download | join() }}"
+    dest: "{{ gitui_temp }}"
+  when: github_download is defined
+  become: false
+
+- name: Install gitui
+  block:
+    - name: Unpack downloaded version
+      ansible.builtin.unarchive:
+        src: "{{ gitui_temp }}"
+        dest: /usr/local/bin
+        mode: 0755
+
+    - name: Delete tar gz file
+      ansible.builtin.file:
+        path: "{{ gitui_temp }}"
+        state: absent
+  become: true

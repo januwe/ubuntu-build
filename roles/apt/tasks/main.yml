@@ -21,3 +21,42 @@
     ansible.builtin.apt: upgrade=yes force_apt_get=yes
 
   become: true
+
+- name: "bat config"
+  block:
+  - name: "Fix bat installation ( 1 / 5 )"
+    ansible.builtin.file:
+      src: /usr/bin/batcat
+      dest: /usr/local/bin/bat
+      state: link
+
+  - name: "Create bat config path ( 2 / 5 )"
+    ansible.builtin.file:
+      path: "{{ bat_path }}"
+      state: directory
+      owner: "{{ local_user }}"
+      group: "{{ local_user }}"
+      mode: 0755
+
+  - name: "Copy bat config ( 3 / 5 )"
+    ansible.builtin.copy:
+      src: files/bat.config
+      dest: "{{ bat_path }}/config"
+      owner: "{{ local_user }}"
+      group: "{{ local_user }}"
+      mode: 0664
+
+  - name: "Create bat theme path ( 4 / 5 )"
+    ansible.builtin.file:
+      path: "{{ bat_path }}/themes"
+      state: directory
+      owner: "{{ local_user }}"
+      group: "{{ local_user }}"
+      mode: 0755
+    
+  - name: "Download catppuccin theme ( 5 / 5 )"
+    ansible.builtin.get_url:
+      url: https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Macchiato.tmTheme
+      dest: "{{ bat_path }}/themes/Catppuccin Macchiato.tmTheme"
+      mode: 0644
+
