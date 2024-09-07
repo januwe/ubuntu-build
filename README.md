@@ -8,7 +8,6 @@ Ansible playbook to build my ubuntu
 - [x] SpaceVim
 - [ ] Obsidian
 - [ ] auditd + laurel / ufw
-- [ ] firefox extensions
 - [X] mount `/tmp` on tmpfs
 - [X] disable system crash reports
 - [X] install oh my zsh
