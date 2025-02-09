@@ -28,3 +28,15 @@ omz_plugins:
 spacevim_install_path: /tmp/install.sh
 terminator_path: "{{ user_config }}/terminator"
 zshrc_path: "{{ user_home }}/.zshrc"
+
+
+# Restic Vars 
+resticprofile_path: "{{ user_config }}/resticprofile"
+repo_path: "/media/uwe/backup"
+password_file: "{{ user_config }}/password.txt"
+backup_paths:
+  - "~/.config"
+  - "~/.ssh"
+  - "~/.minecraft"
+  - "~/Projects"
+  - "~/THM"

@@ -1,6 +1,8 @@
 ---
 - name: "Customizing Ubuntu"
   hosts: all
+  vars_files:
+    - defaults/main.yml
 
   roles:
     - role: "apt"
@@ -24,5 +26,5 @@
     - role: "terminal"
       tags: terminal
 
-    - role: "virtualization"
-      tags: vm
+    - role: "restic"
+      tags: restic

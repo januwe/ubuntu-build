@@ -1,0 +1,8 @@
+---
+
+- hosts: 127.0.0.1
+  vars_files:
+    - vars.yml
+  tasks:
+  - name: Test jinja2template
+    template: src=../templates/profiles.conf.j2 dest=profiles.conf

@@ -1,0 +1,18 @@
+---
+
+version: "1"
+
+default:
+  repository: "local:{{ repo_path }}"
+  password-file: "{{ password_file }}"
+  initialize: true
+
+  backup:
+    exclude:
+      - /**/.git
+      - /**/home-assistant
+    verbose: true
+    source:
+  {% for path in backup_paths %}
+  - "{{ path }}"
+  {% endfor %}

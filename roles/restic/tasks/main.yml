@@ -1,0 +1,10 @@
+---
+
+- include_tasks: restic_profile_install.yml
+  tags: restic_install
+
+- include_tasks: restic_init.yml
+  tags: restic_init
+
+- include_tasks: restic_restore.yml
+  tags: restic_restore

@@ -1,0 +1,35 @@
+---
+
+- name: "Create resticprofile config dir"
+  ansible.builtin.file:
+    path: "{{ resticprofile_path }}"
+    state: directory
+    owner: "{{ local_user }}"
+    group: "{{ local_user }}"
+    mode: 0755
+
+- name: "Copy resticprofile template conf"
+  ansible.builtin.template:
+    src: profiles.conf.j2
+    dest: "{{ resticprofile_path }}/profiles.yaml"
+    owner: "{{ local_user }}"
+    group: "{{ local_user }}"
+    mode: 0644
+
+- name: "Check if password file exists"
+  ansible.builtin.stat:
+    path: "{{ password_file }}"
+  register: password_file_stat
+
+- name: "Generate password file"
+  ansible.builtin.shell: "/usr/local/bin/resticprofile generate --random-key > {{ password_file }}"
+  when: not password_file_stat.stat.exists
+
+- name: "Init resticprofile repo"
+  ansible.builtin.shell: "/usr/local/bin/resticprofile init"
+  register: restic_init
+  failed_when: not restic_init.rc == 0
+
+- name: "debug"
+  debug:
+    var: restic_init

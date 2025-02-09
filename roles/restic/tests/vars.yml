@@ -1,0 +1,10 @@
+---
+
+repo_path: "/media/uwe/backup"
+password_file: "{{ user_config }}/password.txt"
+backup_paths:
+  - "~/.config"
+  - "~/.ssh"
+  - "~/.minecraft"
+  - "~/Projects"
+  - "~/THM"
