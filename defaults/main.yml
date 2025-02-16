@@ -1,42 +1,9 @@
 ---
 
-vim_dependencies:
-  - vim
-  - curl
-
-omz_dependencies:
-  - zsh
-  - curl
-  - git
-
-bat_path: "{{ user_config }}/bat"
-user_config: "{{ user_home }}/.config"
+# local_user vars
 user_home: "/home/{{ local_user }}"
-omz_theme: uwe
-omz_path: "{{ user_home }}/.oh-my-zsh"
-omz_custom_path: "{{ omz_path }}/custom"
-omz_theme_path: "{{ omz_custom_path }}/themes"
-omz_plugin_path: "{{ omz_custom_path }}/plugins"
-omz_plugins: 
-  - git
-  - k
-    #- thefuck
-  - zsh-autosuggestions
-  - zsh-syntax-highlighting
-  - history-substring-search
+user_config: "{{ user_home }}/.config"
 
-spacevim_install_path: /tmp/install.sh
+# config dir vars
+bat_path: "{{ user_config }}/bat"
 terminator_path: "{{ user_config }}/terminator"
-zshrc_path: "{{ user_home }}/.zshrc"
-
-
-# Restic Vars 
-resticprofile_path: "{{ user_config }}/resticprofile"
-repo_path: "/media/uwe/backup"
-password_file: "{{ user_config }}/password.txt"
-backup_paths:
-  - "~/.config"
-  - "~/.ssh"
-  - "~/.minecraft"
-  - "~/Projects"
-  - "~/THM"

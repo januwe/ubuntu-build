@@ -1,0 +1,19 @@
+---
+
+backup_paths:
+  - "~/.config"
+  - "~/.ssh"
+  - "~/.minecraft"
+  - "~/Projects"
+  - "~/THM"
+
+target_bin: /usr/local/bin
+temp_dir: /var/tmp/ansible
+venv_dir: /var/tmp/venv
+arch: linux_amd64
+github_token: "<github_token>"
+
+resticprofile_path: "{{ user_config }}/resticprofile"
+
+password_file: "{{ resticprofile_path }}/password.txt"
+repo_path: "/media/uwe/backup"

@@ -1,0 +1,8 @@
+---
+
+spacevim_conf_path: "/home/{{ local_user }}/.SpaceVim.d"
+spacevim_install_path: /tmp/install.sh
+
+vim_dependencies:
+  - vim
+  - curl

@@ -1,0 +1,23 @@
+---
+
+omz_dependencies:
+  - zsh
+  - curl
+  - git
+
+omz_path: "{{ user_home }}/.oh-my-zsh"
+omz_custom_path: "{{ omz_path }}/custom"
+
+omz_theme_path: "{{ omz_custom_path }}/themes"
+omz_theme: uwe
+
+omz_plugin_path: "{{ omz_custom_path }}/plugins"
+omz_plugins: 
+  - git
+  - k
+    #- thefuck
+  - zsh-autosuggestions
+  - zsh-syntax-highlighting
+  - history-substring-search
+
+zshrc_path: "{{ user_home }}/.zshrc"

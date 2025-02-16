@@ -9,7 +9,7 @@
 
 - name: "Create .SpaceVim.d dir"
   ansible.builtin.file:
-    path: "/home/{{ local_user }}/.SpaceVim.d"
+    path: "{{ spacevim_conf_path }}"
     state: directory
     owner: "{{ local_user }}"
     group: "{{ local_user }}"
