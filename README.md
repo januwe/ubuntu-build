@@ -6,19 +6,16 @@ Ansible playbook to build my ubuntu
 - [x] oh-my-zsh + theme
 - [x] default terminal
 - [x] SpaceVim
-- [ ] Obsidian
 - [ ] auditd + laurel / ufw
 - [X] mount `/tmp` on tmpfs
 - [X] disable system crash reports
 - [X] install oh my zsh
 - [X] set default editor to vim instead of nano 
-- [ ] setup venv for python
-- [ ] install vscode
-- [ ] install docker
-- [ ] install virtualbox
-- [ ] maybe libvirt qemu setup ? 
-- [ ] add user to docker and vboxusers group
 - [X] enable fstrim for better ssd lifetime 
+- [ ] install flatpak and add flathub remote
+- [ ] install podman + distrobox 
+- [ ] configure distrobox
+- [ ] configure bat, exa, zoxide, navi for zsh
 
 ## Steps on fresh install
 ----
