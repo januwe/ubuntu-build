@@ -17,7 +17,7 @@
 
     - name: set fact
       set_fact:
-        github_download: "{{ asset_urls | select('search', 'https.*linux-musl.*gz') }}"
+        github_download: "{{ asset_urls | select('search', 'https.*linux-x86_64.tar.gz') }}"
 
   run_once: true
   become: false

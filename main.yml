@@ -11,20 +11,20 @@
     - role: "gitui"
       tags: gitui
 
-    - role: "polybar"
-      tags: polybar
+        #- role: "polybar"
+        # tags: polybar
 
-    - role: "common"
-      tags: common
+        #    - role: "common"
+        # tags: common
 
-    - role: "vim"
-      tags: vim
+        #    - role: "vim"
+        #    tags: vim
 
-    - role: "omz"
-      tags: omz
+        # - role: "omz"
+        # tags: omz
 
     - role: "terminal"
       tags: terminal
 
-    - role: "restic"
-      tags: restic
+        #- role: "restic"
+        # tags: restic
